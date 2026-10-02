@@ -2,6 +2,10 @@ const form = document.querySelector("#applicationForm");
 const motivation = form.elements.motivacao;
 const count = document.querySelector("#charCount");
 const status = document.querySelector("#formStatus");
+const submitButton = form.querySelector("button[type='submit']");
+const API_BASE_URL = ["localhost", "127.0.0.1"].includes(window.location.hostname)
+  ? "http://localhost:3000"
+  : "https://gestor-hello-inova.vercel.app";
 
 motivation.addEventListener("input", () => {
   count.textContent = motivation.value.length;
@@ -32,46 +36,47 @@ function validate(values) {
   return values;
 }
 
-function createMailto(values) {
-  const subject = `Candidatura SDR Freelancer — ${values.nome}`;
-  const body = [
-    "Olá, Hello Inova!",
-    "",
-    "Gostaria de me candidatar à vaga de SDR Freelancer.",
-    "",
-    `Nome: ${values.nome}`,
-    `WhatsApp: ${values.whatsapp}`,
-    `E-mail: ${values.email}`,
-    `Cidade / Estado: ${values.localidade}`,
-    `Instagram: ${values.instagram}`,
-    `Experiência com prospecção: ${values.experiencia}`,
-    `Comissão desejada: ${values.comissao}%`,
-    "",
-    "Motivação:",
-    values.motivacao,
-    "",
-    "Autorizo o uso destes dados exclusivamente para este processo seletivo e estou ciente de que a remuneração será somente por comissão sobre vendas fechadas."
-  ].join("\n");
-  return `mailto:helloinovatecnologi@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-}
-
-function prepareApplication(rawValues) {
+async function submitApplication(rawValues) {
   const values = validate(rawValues);
-  const mailto = createMailto(values);
+  const response = await fetch(`${API_BASE_URL}/api/candidates`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: values.nome,
+      whatsapp: values.whatsapp,
+      email: values.email,
+      location: values.localidade,
+      instagram_url: values.instagram,
+      prospecting_experience: values.experiencia,
+      desired_commission: Number(values.comissao),
+      motivation: values.motivacao,
+      consent: values.consentimento
+    })
+  });
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(result.error || "Não foi possível enviar sua candidatura. Tente novamente.");
+  }
   status.className = "form-status success";
-  status.textContent = "Tudo certo! Abrimos seu aplicativo de e-mail. Revise a mensagem e confirme o envio.";
-  return { mailto, candidate: values.nome, status: "ready_to_send" };
+  status.textContent = "Candidatura enviada com sucesso! Seus dados já estão com a equipe da Hello Inova.";
+  form.reset();
+  count.textContent = "0";
+  return { candidate: values.nome, candidateId: result.candidate?.id, status: "submitted" };
 }
 
-form.addEventListener("submit", (event) => {
+form.addEventListener("submit", async (event) => {
   event.preventDefault();
   status.className = "form-status";
+  submitButton.disabled = true;
+  submitButton.querySelector("span").textContent = "Enviando...";
   try {
-    const result = prepareApplication(valuesFromForm());
-    window.location.href = result.mailto;
+    await submitApplication(valuesFromForm());
   } catch (error) {
     status.className = "form-status error";
     status.textContent = error.message;
+  } finally {
+    submitButton.disabled = false;
+    submitButton.querySelector("span").textContent = "Enviar candidatura";
   }
 });
 
@@ -95,12 +100,12 @@ function registerWebMcpTool() {
     additionalProperties: false
   };
   context.registerTool({
-    name: "prepare_sdr_application",
-    title: "Preparar candidatura para SDR",
-    description: "Preenche e prepara a candidatura de SDR freelancer para envio por e-mail.",
+    name: "submit_sdr_application",
+    title: "Enviar candidatura para SDR",
+    description: "Preenche e envia a candidatura de SDR freelancer para a Hello Inova.",
     inputSchema: schema,
     annotations: { readOnlyHint: false, untrustedContentHint: false },
-    execute(input) {
+    async execute(input) {
       Object.entries(input).forEach(([name, value]) => {
         const control = form.elements[name];
         if (!control) return;
@@ -108,7 +113,7 @@ function registerWebMcpTool() {
         else control.value = String(value);
       });
       count.textContent = motivation.value.length;
-      return prepareApplication(valuesFromForm());
+      return submitApplication(valuesFromForm());
     }
   });
 }

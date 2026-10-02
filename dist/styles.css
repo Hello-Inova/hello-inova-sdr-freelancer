@@ -99,6 +99,7 @@ input:focus, select:focus, textarea:focus { border-color: var(--cyan); backgroun
 .consent input { width: 17px; min-height: auto; margin-top: 3px; accent-color: var(--blue); }
 .submit-button { min-height: 56px; border: 0; border-radius: 13px; display: flex; align-items: center; justify-content: center; gap: 12px; background: linear-gradient(135deg, #0d47fe, #2563ff 62%, #0e88ff); color: white; font: inherit; font-size: .92rem; font-weight: 700; cursor: pointer; box-shadow: 0 14px 35px rgba(13, 71, 254, .28); transition: transform .2s, box-shadow .2s; }
 .submit-button:hover { transform: translateY(-2px); box-shadow: 0 18px 42px rgba(13, 71, 254, .38); }
+.submit-button:disabled { cursor: wait; opacity: .7; transform: none; }
 .submit-button:focus-visible { outline: 3px solid rgba(0, 212, 255, .7); outline-offset: 3px; }
 .submit-button svg { width: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .form-note { margin: -7px 0 0; color: #7d8797; font-size: .71rem; text-align: center; }
