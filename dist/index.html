@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vaga SDR Freelancer | Hello Inova</title>
+    <meta name="description" content="Candidate-se à vaga de SDR freelancer da Hello Inova." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%230f1115'/%3E%3Cpath d='M15 15h10v14c0 4 3 7 7 7s7-3 7-7V15h10v34H39V39c-2 4-6 7-12 7-7 0-12-5-12-13V15Z' fill='%232563ff'/%3E%3Cpath d='M47 11h5v5h-5zm-7 0h4v4h-4zm13 8h4v4h-4z' fill='%2300d4ff'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+
+    <header class="site-header">
+      <a class="brand" href="#inicio" aria-label="Hello Inova — início">
+        <img src="assets/logo.png" alt="" width="54" height="54" />
+        <span>
+          <strong>Hello<span>Inova</span></strong>
+          <small>Da mente às telas</small>
+        </span>
+      </a>
+      <div class="header-label"><span></span> Oportunidade aberta</div>
+    </header>
+
+    <main id="inicio" class="page-shell">
+      <section class="intro" aria-labelledby="page-title">
+        <div class="eyebrow">Faça parte do nosso time comercial</div>
+        <h1 id="page-title">Vaga para <em>SDR Freelancer</em></h1>
+        <p class="lead">Buscamos uma pessoa comunicativa, organizada e orientada a resultados para prospectar novas oportunidades e ajudar empresas a encontrarem a solução digital certa.</p>
+
+        <div class="role-details" aria-label="Informações da vaga">
+          <div><span>Modelo</span><strong>Freelancer</strong></div>
+          <div><span>Formato</span><strong>Remoto</strong></div>
+          <div><span>Área</span><strong>Comercial B2B</strong></div>
+        </div>
+
+        <div class="fit-card">
+          <h2>Você vai se destacar se...</h2>
+          <ul>
+            <li>Tem boa comunicação escrita e verbal</li>
+            <li>Gosta de prospectar e conversar com empresas</li>
+            <li>É disciplinado(a) para trabalhar com autonomia</li>
+            <li>Já conhece CRM ou vendas consultivas</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="form-card" aria-labelledby="form-title">
+        <div class="form-heading">
+          <span>01</span>
+          <div>
+            <p>Candidatura</p>
+            <h2 id="form-title">Conte um pouco sobre você</h2>
+          </div>
+        </div>
+
+        <form id="applicationForm" novalidate>
+          <div class="field-grid">
+            <label class="field">
+              <span>Nome completo *</span>
+              <input name="nome" type="text" autocomplete="name" placeholder="Como podemos te chamar?" required />
+            </label>
+            <label class="field">
+              <span>WhatsApp *</span>
+              <input name="whatsapp" type="tel" autocomplete="tel" inputmode="tel" placeholder="(00) 00000-0000" required />
+            </label>
+          </div>
+
+          <div class="field-grid">
+            <label class="field">
+              <span>E-mail *</span>
+              <input name="email" type="email" autocomplete="email" placeholder="voce@email.com" required />
+            </label>
+            <label class="field">
+              <span>Cidade / Estado *</span>
+              <input name="localidade" type="text" autocomplete="address-level2" placeholder="Ex.: São Paulo / SP" required />
+            </label>
+          </div>
+
+          <label class="field">
+            <span>LinkedIn ou currículo online *</span>
+            <input name="perfil" type="url" inputmode="url" placeholder="https://linkedin.com/in/seu-perfil" required />
+            <small>Você também pode informar um link do Google Drive com acesso liberado.</small>
+          </label>
+
+          <div class="field-grid">
+            <label class="field">
+              <span>Experiência com prospecção *</span>
+              <select name="experiencia" required>
+                <option value="">Selecione</option>
+                <option>Estou começando</option>
+                <option>Até 1 ano</option>
+                <option>De 1 a 3 anos</option>
+                <option>Mais de 3 anos</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Disponibilidade semanal *</span>
+              <select name="disponibilidade" required>
+                <option value="">Selecione</option>
+                <option>Até 10 horas</option>
+                <option>De 10 a 20 horas</option>
+                <option>De 20 a 30 horas</option>
+                <option>Mais de 30 horas</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="field">
+            <span>Por que você quer trabalhar com a Hello Inova? *</span>
+            <textarea name="motivacao" rows="4" maxlength="700" placeholder="Fale sobre sua experiência, seu jeito de vender e o que chamou sua atenção na oportunidade." required></textarea>
+            <small class="counter"><span id="charCount">0</span>/700</small>
+          </label>
+
+          <label class="consent">
+            <input name="consentimento" type="checkbox" required />
+            <span>Autorizo a Hello Inova a usar estes dados exclusivamente para este processo seletivo. *</span>
+          </label>
+
+          <button class="submit-button" type="submit">
+            <span>Enviar candidatura</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5" /></svg>
+          </button>
+          <p class="form-note">Ao enviar, seu aplicativo de e-mail será aberto com as respostas preenchidas. Basta revisar e confirmar o envio.</p>
+          <div id="formStatus" class="form-status" role="status" aria-live="polite"></div>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2026 Hello Inova <span>•</span> Tecnologia que transforma ideias em soluções.</p>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
