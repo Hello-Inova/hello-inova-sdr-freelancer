@@ -14,9 +14,9 @@ function valuesFromForm() {
     whatsapp: String(data.get("whatsapp") || "").trim(),
     email: String(data.get("email") || "").trim(),
     localidade: String(data.get("localidade") || "").trim(),
-    perfil: String(data.get("perfil") || "").trim(),
+    instagram: String(data.get("instagram") || "").trim(),
     experiencia: String(data.get("experiencia") || "").trim(),
-    disponibilidade: String(data.get("disponibilidade") || "").trim(),
+    comissao: String(data.get("comissao") || "").trim(),
     motivacao: String(data.get("motivacao") || "").trim(),
     consentimento: data.get("consentimento") === "on"
   };
@@ -43,14 +43,14 @@ function createMailto(values) {
     `WhatsApp: ${values.whatsapp}`,
     `E-mail: ${values.email}`,
     `Cidade / Estado: ${values.localidade}`,
-    `LinkedIn ou currículo: ${values.perfil}`,
+    `Instagram: ${values.instagram}`,
     `Experiência com prospecção: ${values.experiencia}`,
-    `Disponibilidade semanal: ${values.disponibilidade}`,
+    `Comissão desejada: ${values.comissao}%`,
     "",
     "Motivação:",
     values.motivacao,
     "",
-    "Autorizo o uso destes dados exclusivamente para este processo seletivo."
+    "Autorizo o uso destes dados exclusivamente para este processo seletivo e estou ciente de que a remuneração será somente por comissão sobre vendas fechadas."
   ].join("\n");
   return `mailto:helloinovatecnologi@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
@@ -85,13 +85,13 @@ function registerWebMcpTool() {
       whatsapp: { type: "string" },
       email: { type: "string" },
       localidade: { type: "string" },
-      perfil: { type: "string" },
+      instagram: { type: "string" },
       experiencia: { type: "string" },
-      disponibilidade: { type: "string" },
+      comissao: { type: "string" },
       motivacao: { type: "string", maxLength: 700 },
       consentimento: { type: "boolean" }
     },
-    required: ["nome", "whatsapp", "email", "localidade", "perfil", "experiencia", "disponibilidade", "motivacao", "consentimento"],
+    required: ["nome", "whatsapp", "email", "localidade", "instagram", "experiencia", "comissao", "motivacao", "consentimento"],
     additionalProperties: false
   };
   context.registerTool({
